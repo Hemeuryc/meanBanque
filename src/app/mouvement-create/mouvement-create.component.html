@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>Ajouter un mouvement</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <form (ngSubmit)="saveMouvement()" #mouvementForm="ngForm">
+        <div class="form-group">
+          <label for="name">Intitulé</label>
+          <input type="text" class="form-control" [(ngModel)]="mouvement.intitule" name="intitule" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Code</label>
+          <input type="text" class="form-control" [(ngModel)]="mouvement.code" name="code" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Prix</label>
+          <input type="text" class="form-control" [(ngModel)]="mouvement.prix" name="prix" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Date d'exécution</label>
+          <input type="date" class="form-control" [(ngModel)]="mouvement.date" name="date" required>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success" [disabled]="!mouvementForm.form.valid">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
