@@ -9,14 +9,11 @@ import { routing } from './app.routing';
 import { customHttpProvider } from './_helpers/index';
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
-import { AlertService, AuthenticationService, UserService } from './_services/index';
+import { AlertService, AuthenticationService, UserService , MouvementService} from './_services/index';
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
-import { MenuComponent} from './menu/index';
-import { MouvementComponent} from './mouvement/index';
-import { MouvementCreateComponent} from './mouvement-create/index';
-import { MouvementEditComponent} from './mouvement-edit/index';
+
 
 @NgModule({
     imports: [
@@ -30,11 +27,7 @@ import { MouvementEditComponent} from './mouvement-edit/index';
         AlertComponent,
         HomeComponent,
         LoginComponent,
-        MenuComponent,
-        RegisterComponent,
-        MouvementComponent,
-        MouvementCreateComponent,
-        MouvementEditComponent
+        RegisterComponent
     ],
     providers: [
         customHttpProvider,

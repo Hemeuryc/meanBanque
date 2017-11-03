@@ -1,8 +1,8 @@
 var config = require('config.json');
 var express = require('express');
 var router = express.Router();
-var userService = require('services/user.service');
-
+var mouvementService = require('services/mouvemnt.service');
+/*
 // routes
 router.post('/authenticate', authenticate);
 router.post('/register', register);
@@ -81,4 +81,4 @@ function _delete(req, res) {
         .catch(function (err) {
             res.status(400).send(err);
         });
-}
+}*/
