@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
-import { User } from '../_models/index';
-import { UserService } from '../_services/index';
+import { User, Mouvement } from '../_models/index';
+import { UserService , MouvementService } from '../_services/index';
 
 @Component({
     moduleId: module.id,
@@ -11,13 +11,17 @@ import { UserService } from '../_services/index';
 export class HomeComponent implements OnInit {
     currentUser: User;
     users: User[] = [];
+    private _listeFilter: string ;
+    mouvements : Mouvement[] = [];
+    filteredMouvements :  Mouvement[] = [];
 
-    constructor(private userService: UserService) {
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    }
+
 
     ngOnInit() {
         this.loadAllUsers();
+        this.loadAllMouvements();
+
+        this.filteredMouvements = this.mouvements;
     }
 
     deleteUser(_id: string) {
@@ -27,4 +31,30 @@ export class HomeComponent implements OnInit {
     private loadAllUsers() {
         this.userService.getAll().subscribe(users => { this.users = users; });
     }
+
+    private loadAllMouvements() {
+        this.mouvementService.getAllMouvement().subscribe(mouvements => { this.mouvements = mouvements; });
+    }
+
+    get listeFilter(): string {
+        return this._listeFilter;
+    }
+    set listeFilter(value: string) {
+        this._listeFilter = value;
+        this.filteredMouvements = this.listeFilter ? this.performFilter(this.listeFilter) : this.mouvements;
+    }
+
+    performFilter(filterBy: string): any {
+        filterBy =  filterBy.toLocaleLowerCase();
+        return this.mouvements.filter((mouvement: any) =>
+            mouvement.intitule.toLocaleLowerCase().indexOf(filterBy) !== -1);
+    }
+
+    constructor(private userService: UserService, private mouvementService: MouvementService) {
+        this.loadAllMouvements();
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.filteredMouvements = this.mouvements;
+
+    }
+
 }

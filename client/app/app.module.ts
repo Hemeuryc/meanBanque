@@ -13,6 +13,7 @@ import { AlertService, AuthenticationService, UserService , MouvementService} fr
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
+import {MouvementCreateComponent} from './mouvement-create/index';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { RegisterComponent } from './register/index';
         AlertComponent,
         HomeComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        MouvementCreateComponent
     ],
     providers: [
         customHttpProvider,

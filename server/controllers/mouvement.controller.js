@@ -1,36 +1,20 @@
 var config = require('config.json');
 var express = require('express');
 var router = express.Router();
-var mouvementService = require('services/mouvemnt.service');
-/*
+var mouvementService = require('services/mouvement.service');
+
 // routes
-router.post('/authenticate', authenticate);
-router.post('/register', register);
-router.get('/', getAll);
-router.get('/current', getCurrent);
+//router.post('/authenticate', authenticate);
+router.post('/create', newMouvement);
+router.get('/', getAllMouvement);
 router.put('/:_id', update);
 router.delete('/:_id', _delete);
 
 module.exports = router;
 
-function authenticate(req, res) {
-    userService.authenticate(req.body.username, req.body.password)
-        .then(function (user) {
-            if (user) {
-                // authentication successful
-                res.send(user);
-            } else {
-                // authentication failed
-                res.status(400).send('Username or password is incorrect');
-            }
-        })
-        .catch(function (err) {
-            res.status(400).send(err);
-        });
-}
 
-function register(req, res) {
-    userService.create(req.body)
+function newMouvement(req, res) {
+    mouvementService.create(req.body)
         .then(function () {
             res.sendStatus(200);
         })
@@ -39,10 +23,10 @@ function register(req, res) {
         });
 }
 
-function getAll(req, res) {
-    userService.getAll()
-        .then(function (users) {
-            res.send(users);
+function getAllMouvement(req, res) {
+    mouvementService.getAllMouvement()
+        .then(function (mouvements) {
+            res.send(mouvements);
         })
         .catch(function (err) {
             res.status(400).send(err);
@@ -50,10 +34,10 @@ function getAll(req, res) {
 }
 
 function getCurrent(req, res) {
-    userService.getById(req.user.sub)
-        .then(function (user) {
-            if (user) {
-                res.send(user);
+    mouvementService.getById(req.mouvement.sub)
+        .then(function (mouvement) {
+            if (mouvement) {
+                res.send(mouvement);
             } else {
                 res.sendStatus(404);
             }
@@ -64,7 +48,7 @@ function getCurrent(req, res) {
 }
 
 function update(req, res) {
-    userService.update(req.params._id, req.body)
+    mouvementService.update(req.params._id, req.body)
         .then(function () {
             res.sendStatus(200);
         })
@@ -74,11 +58,11 @@ function update(req, res) {
 }
 
 function _delete(req, res) {
-    userService.delete(req.params._id)
+    mouvementService.delete(req.params._id)
         .then(function () {
             res.sendStatus(200);
         })
         .catch(function (err) {
             res.status(400).send(err);
         });
-}*/
+}

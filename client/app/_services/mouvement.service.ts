@@ -7,7 +7,7 @@ import { Mouvement } from '../_models/index';
 export class MouvementService {
     constructor(private http: Http) { }
 
-    getAll() {
+    getAllMouvement() {
         return this.http.get('/mouvements').map((response: Response) => response.json());
     }
 

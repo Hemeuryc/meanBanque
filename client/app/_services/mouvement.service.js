@@ -15,7 +15,7 @@ var MouvementService = /** @class */ (function () {
     function MouvementService(http) {
         this.http = http;
     }
-    MouvementService.prototype.getAll = function () {
+    MouvementService.prototype.getAllMouvement = function () {
         return this.http.get('/mouvements').map(function (response) { return response.json(); });
     };
     MouvementService.prototype.getById = function (_id) {

@@ -19,6 +19,7 @@ var index_4 = require("./_services/index");
 var index_5 = require("./home/index");
 var index_6 = require("./login/index");
 var index_7 = require("./register/index");
+var index_8 = require("./mouvement-create/index");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -35,7 +36,8 @@ var AppModule = /** @class */ (function () {
                 index_2.AlertComponent,
                 index_5.HomeComponent,
                 index_6.LoginComponent,
-                index_7.RegisterComponent
+                index_7.RegisterComponent,
+                index_8.MouvementCreateComponent
             ],
             providers: [
                 index_1.customHttpProvider,

@@ -12,13 +12,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var index_1 = require("../_services/index");
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(userService) {
+    function HomeComponent(userService, mouvementService) {
         this.userService = userService;
+        this.mouvementService = mouvementService;
         this.users = [];
+        this.mouvements = [];
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.filteredMouvements = this.mouvements;
     }
     HomeComponent.prototype.ngOnInit = function () {
         this.loadAllUsers();
+        this.loadAllMouvements();
+        this.filteredMouvements = this.mouvements;
     };
     HomeComponent.prototype.deleteUser = function (_id) {
         var _this = this;
@@ -28,12 +33,33 @@ var HomeComponent = /** @class */ (function () {
         var _this = this;
         this.userService.getAll().subscribe(function (users) { _this.users = users; });
     };
+    HomeComponent.prototype.loadAllMouvements = function () {
+        var _this = this;
+        this.mouvementService.getAllMouvement().subscribe(function (mouvements) { _this.mouvements = mouvements; });
+    };
+    Object.defineProperty(HomeComponent.prototype, "listeFilter", {
+        get: function () {
+            return this._listeFilter;
+        },
+        set: function (value) {
+            this._listeFilter = value;
+            this.filteredMouvements = this.listeFilter ? this.performFilter(this.listeFilter) : this.mouvements;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    HomeComponent.prototype.performFilter = function (filterBy) {
+        filterBy = filterBy.toLocaleLowerCase();
+        return this.mouvements.filter(function (mouvement) {
+            return mouvement.intitule.toLocaleLowerCase().indexOf(filterBy) !== -1;
+        });
+    };
     HomeComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             templateUrl: 'home.component.html'
         }),
-        __metadata("design:paramtypes", [index_1.UserService])
+        __metadata("design:paramtypes", [index_1.UserService, index_1.MouvementService])
     ], HomeComponent);
     return HomeComponent;
 }());
