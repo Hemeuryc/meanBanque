@@ -13,7 +13,6 @@ service.getAllMouvement = getAllMouvement;
 service.create = create;
 service.update = update;
 service.delete = _delete;
-service.getMouvementById= getMouvementById ;
 
 module.exports = service;
 
@@ -52,6 +51,7 @@ function getMouvementById(_id) {
 
     return deferred.promise;
 }
+
 
 function create(mouvementParam) {
     var deferred = Q.defer();

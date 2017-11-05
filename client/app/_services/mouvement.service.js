@@ -19,7 +19,7 @@ var MouvementService = /** @class */ (function () {
         return this.http.get('/mouvements').map(function (response) { return response.json(); });
     };
     MouvementService.prototype.getMouvementById = function (_id) {
-        return this.http.get('/mouvements/' + _id).map(function (response) { return response.json(); });
+        return this.http.get('/mouvements/edit/' + _id).map(function (response) { return response.json(); });
     };
     MouvementService.prototype.create = function (mouvement) {
         return this.http.post('/mouvements/create', mouvement);

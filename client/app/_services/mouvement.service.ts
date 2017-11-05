@@ -11,8 +11,9 @@ export class MouvementService {
         return this.http.get('/mouvements').map((response: Response) => response.json());
     }
 
+
     getMouvementById(_id: string) {
-        return this.http.get('/mouvements/' + _id).map((response: Response) => response.json());
+        return this.http.get('/mouvements/edit/' + _id).map((response: Response) => response.json());
     }
 
     create(mouvement: Mouvement) {

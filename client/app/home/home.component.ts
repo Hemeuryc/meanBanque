@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
 import { User, Mouvement } from '../_models/index';
-import { UserService , MouvementService } from '../_services/index';
+import {AlertService , UserService , MouvementService } from '../_services/index';
 
 @Component({
     moduleId: module.id,
@@ -15,17 +15,32 @@ export class HomeComponent implements OnInit {
     mouvements : Mouvement[] = [];
     filteredMouvements :  Mouvement[] = [];
 
+    filteredFuturMouvements : Mouvement[]= [];
+
 
 
     ngOnInit() {
         this.loadAllUsers();
         this.loadAllMouvements();
 
-        this.filteredMouvements = this.mouvements;
     }
 
     deleteUser(_id: string) {
         this.userService.delete(_id).subscribe(() => { this.loadAllUsers() });
+    }
+
+    deleteMouvement(_id: string) {
+        this.mouvementService.delete(_id)
+            .subscribe(
+                data => {
+                    this.filteredMouvements = [];
+                    this.filteredFuturMouvements = [];
+                    this.loadAllMouvements();
+                    this.alertService.success('Suppression du mouvement réussie', true);
+                },
+                error => {
+                    this.alertService.error(error);
+                });
     }
 
     private loadAllUsers() {
@@ -33,7 +48,21 @@ export class HomeComponent implements OnInit {
     }
 
     private loadAllMouvements() {
-      this.mouvementService.getAllMouvement().subscribe(mouvements => { this.filteredMouvements = mouvements; });
+
+      this.mouvementService.getAllMouvement()
+          .subscribe(mouvements => {
+              let today = new Date();
+
+                  for (let mouvement of mouvements) {
+                      let mouvementDate = new Date(mouvement.date);
+                      if(mouvement.user_id == this.currentUser._id ){
+                          if(mouvementDate.valueOf() >  today.valueOf()){
+                              this.filteredFuturMouvements.push(mouvement);
+                          }else{
+                              this.filteredMouvements.push(mouvement);
+                          }
+                      }}
+              });
     }
 
     get listeFilter(): string {
@@ -50,10 +79,8 @@ export class HomeComponent implements OnInit {
             mouvement.intitule.toLocaleLowerCase().indexOf(filterBy) !== -1);
     }
 
-    constructor(private userService: UserService, private mouvementService: MouvementService) {
-        this.loadAllMouvements();
+    constructor(private userService: UserService, private mouvementService: MouvementService,  private alertService: AlertService) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.filteredMouvements = this.mouvements;
 
     }
 

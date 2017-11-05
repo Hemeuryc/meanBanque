@@ -4,4 +4,5 @@ export class Mouvement {
     code: string;
     prix: number;
     date: Date;
+    user_id : string;
 }

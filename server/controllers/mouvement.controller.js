@@ -8,7 +8,7 @@ router.post('/create', newMouvement);
 router.get('/', getAllMouvement);
 router.put('/:_id', update);
 router.delete('/:_id', _delete);
-router.get('/:_id', getMouvementById);
+router.get('/edit/:_id', getMouvementById);
 
 module.exports = router;
 

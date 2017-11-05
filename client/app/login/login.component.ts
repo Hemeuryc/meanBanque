@@ -32,7 +32,8 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(
                 data => {
-                    this.router.navigate([this.returnUrl]);
+                    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                    this.router.navigate([currentUser._id]);
                 },
                 error => {
                     this.alertService.error(error);

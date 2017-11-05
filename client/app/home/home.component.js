@@ -12,24 +12,35 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var index_1 = require("../_services/index");
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(userService, mouvementService) {
+    function HomeComponent(userService, mouvementService, alertService) {
         this.userService = userService;
         this.mouvementService = mouvementService;
+        this.alertService = alertService;
         this.users = [];
         this.mouvements = [];
         this.filteredMouvements = [];
-        this.loadAllMouvements();
+        this.filteredFuturMouvements = [];
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.filteredMouvements = this.mouvements;
     }
     HomeComponent.prototype.ngOnInit = function () {
         this.loadAllUsers();
         this.loadAllMouvements();
-        this.filteredMouvements = this.mouvements;
     };
     HomeComponent.prototype.deleteUser = function (_id) {
         var _this = this;
         this.userService.delete(_id).subscribe(function () { _this.loadAllUsers(); });
+    };
+    HomeComponent.prototype.deleteMouvement = function (_id) {
+        var _this = this;
+        this.mouvementService.delete(_id)
+            .subscribe(function (data) {
+            _this.filteredMouvements = [];
+            _this.filteredFuturMouvements = [];
+            _this.loadAllMouvements();
+            _this.alertService.success('Suppression du mouvement réussie', true);
+        }, function (error) {
+            _this.alertService.error(error);
+        });
     };
     HomeComponent.prototype.loadAllUsers = function () {
         var _this = this;
@@ -37,7 +48,22 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.loadAllMouvements = function () {
         var _this = this;
-        this.mouvementService.getAllMouvement().subscribe(function (mouvements) { _this.filteredMouvements = mouvements; });
+        this.mouvementService.getAllMouvement()
+            .subscribe(function (mouvements) {
+            var today = new Date();
+            for (var _i = 0, mouvements_1 = mouvements; _i < mouvements_1.length; _i++) {
+                var mouvement = mouvements_1[_i];
+                var mouvementDate = new Date(mouvement.date);
+                if (mouvement.user_id == _this.currentUser._id) {
+                    if (mouvementDate.valueOf() > today.valueOf()) {
+                        _this.filteredFuturMouvements.push(mouvement);
+                    }
+                    else {
+                        _this.filteredMouvements.push(mouvement);
+                    }
+                }
+            }
+        });
     };
     Object.defineProperty(HomeComponent.prototype, "listeFilter", {
         get: function () {
@@ -61,7 +87,7 @@ var HomeComponent = /** @class */ (function () {
             moduleId: module.id,
             templateUrl: 'home.component.html'
         }),
-        __metadata("design:paramtypes", [index_1.UserService, index_1.MouvementService])
+        __metadata("design:paramtypes", [index_1.UserService, index_1.MouvementService, index_1.AlertService])
     ], HomeComponent);
     return HomeComponent;
 }());

@@ -19,10 +19,12 @@ var MouvementCreateComponent = /** @class */ (function () {
         this.alertService = alertService;
         this.model = {};
         this.loading = false;
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
     MouvementCreateComponent.prototype.createMouvement = function () {
         var _this = this;
         this.loading = true;
+        this.model.user_id = this.currentUser._id;
         this.mouvementService.create(this.model)
             .subscribe(function (data) {
             _this.alertService.success('Création du mouvement réussie', true);

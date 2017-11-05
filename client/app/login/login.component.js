@@ -32,7 +32,8 @@ var LoginComponent = /** @class */ (function () {
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(function (data) {
-            _this.router.navigate([_this.returnUrl]);
+            var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            _this.router.navigate([currentUser._id]);
         }, function (error) {
             _this.alertService.error(error);
             _this.loading = false;

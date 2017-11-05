@@ -18,7 +18,7 @@
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !date.valid }">
             <label for="date">Date d'exécution</label>
-            <input type="date" class="form-control" name="date" [(ngModel)]="model.date" #date="ngModel" required />
+            <input type="date" class="form-control" name="date" placeholder={{model.date}} [(ngModel)]="model.date" #date="ngModel" required />
             <div *ngIf="f.submitted && !date.valid" class="help-block">Champ obligatoire</div>
         </div>
         <div class="form-group">
