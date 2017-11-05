@@ -4,11 +4,11 @@ var router = express.Router();
 var mouvementService = require('services/mouvement.service');
 
 // routes
-//router.post('/authenticate', authenticate);
 router.post('/create', newMouvement);
 router.get('/', getAllMouvement);
 router.put('/:_id', update);
 router.delete('/:_id', _delete);
+router.get('/:_id', getMouvementById);
 
 module.exports = router;
 
@@ -33,8 +33,8 @@ function getAllMouvement(req, res) {
         });
 }
 
-function getCurrent(req, res) {
-    mouvementService.getById(req.mouvement.sub)
+function getMouvementById(req, res) {
+    mouvementService.getMouvementById(req.params._id)
         .then(function (mouvement) {
             if (mouvement) {
                 res.send(mouvement);

@@ -11,7 +11,7 @@ export class MouvementService {
         return this.http.get('/mouvements').map((response: Response) => response.json());
     }
 
-    getById(_id: string) {
+    getMouvementById(_id: string) {
         return this.http.get('/mouvements/' + _id).map((response: Response) => response.json());
     }
 

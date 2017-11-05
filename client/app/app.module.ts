@@ -14,6 +14,7 @@ import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import {MouvementCreateComponent} from './mouvement-create/index';
+import {MouvementEditComponent} from './mouvement-edit/index';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {MouvementCreateComponent} from './mouvement-create/index';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        MouvementCreateComponent
+        MouvementCreateComponent,
+        MouvementEditComponent
     ],
     providers: [
         customHttpProvider,

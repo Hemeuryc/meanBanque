@@ -17,6 +17,8 @@ var HomeComponent = /** @class */ (function () {
         this.mouvementService = mouvementService;
         this.users = [];
         this.mouvements = [];
+        this.filteredMouvements = [];
+        this.loadAllMouvements();
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.filteredMouvements = this.mouvements;
     }
@@ -35,7 +37,7 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.loadAllMouvements = function () {
         var _this = this;
-        this.mouvementService.getAllMouvement().subscribe(function (mouvements) { _this.mouvements = mouvements; });
+        this.mouvementService.getAllMouvement().subscribe(function (mouvements) { _this.filteredMouvements = mouvements; });
     };
     Object.defineProperty(HomeComponent.prototype, "listeFilter", {
         get: function () {

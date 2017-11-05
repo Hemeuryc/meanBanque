@@ -13,6 +13,7 @@ service.getAllMouvement = getAllMouvement;
 service.create = create;
 service.update = update;
 service.delete = _delete;
+service.getMouvementById= getMouvementById ;
 
 module.exports = service;
 
@@ -33,6 +34,24 @@ function getAllMouvement() {
     return deferred.promise;
 }
 
+
+function getMouvementById(_id) {
+    var deferred = Q.defer();
+
+    db.mouvements.findById(_id, function (err, mouvement) {
+        if (err) deferred.reject(err.name + ': ' + err.message);
+
+        if (mouvement) {
+
+            deferred.resolve(mouvement);
+        } else {
+            // user not found
+            deferred.resolve();
+        }
+    });
+
+    return deferred.promise;
+}
 
 function create(mouvementParam) {
     var deferred = Q.defer();

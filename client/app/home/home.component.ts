@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     }
 
     private loadAllMouvements() {
-        this.mouvementService.getAllMouvement().subscribe(mouvements => { this.mouvements = mouvements; });
+      this.mouvementService.getAllMouvement().subscribe(mouvements => { this.filteredMouvements = mouvements; });
     }
 
     get listeFilter(): string {
