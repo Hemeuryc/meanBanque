@@ -13,7 +13,7 @@ mongod
 
 ## Projet réalisé par
 
-• Anthony ARENES (AnthonyArenes)
-• Adrien MICHEL (Jukelips)
-• Clément HEMEURY (Hemeuryc)
-• Ciprian PINTILIE (CPintilie)
+* Anthony ARENES (AnthonyArenes)
+* Adrien MICHEL (Jukelips)
+* Clément HEMEURY (Hemeuryc)
+* Ciprian PINTILIE (CPintilie)
