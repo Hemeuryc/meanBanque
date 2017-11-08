@@ -12,7 +12,7 @@ const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'chats', component: ChatComponent },
+    { path: 'chats', component: ChatComponent, canActivate : [AuthGuard] },
     { path: 'create', component: MouvementCreateComponent ,canActivate: [AuthGuard]},
     { path: 'edit/:id', component: MouvementEditComponent ,canActivate: [AuthGuard]},
     // otherwise redirect to home

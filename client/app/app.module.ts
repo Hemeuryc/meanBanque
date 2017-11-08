@@ -9,15 +9,14 @@ import { routing } from './app.routing';
 import { customHttpProvider } from './_helpers/index';
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
-import { AlertService, AuthenticationService, UserService , MouvementService} from './_services/index';
+import { AlertService, AuthenticationService, UserService,ChatService , MouvementService} from './_services/index';
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import { MouvementCreateComponent } from './mouvement-create/index';
 import { MouvementEditComponent } from './mouvement-edit/index';
 import { MenuComponent } from './menu/index';
-import { ChatService } from './chat.service';
-import { ChatComponent } from './chat/chat.component';
+import { ChatComponent } from './chat/index';
 
 
 @NgModule({

@@ -10,15 +10,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var chat_service_1 = require("../chat.service");
+var index_1 = require("../_services/index");
 var io = require("socket.io-client");
 var ChatComponent = /** @class */ (function () {
     function ChatComponent(chatService) {
         this.chatService = chatService;
+        this.chats = [];
         this.joinned = false;
         this.newUser = { nickname: '', room: '' };
         this.msgData = { room: '', nickname: '', message: '' };
-        this.socket = io('http://localhost:4000');
+        this.socket = io.connect("http://localhost:8080");
     }
     ChatComponent.prototype.ngOnInit = function () {
         var user = JSON.parse(localStorage.getItem("user"));
@@ -47,11 +48,8 @@ var ChatComponent = /** @class */ (function () {
     };
     ChatComponent.prototype.getChatByRoom = function (room) {
         var _this = this;
-        this.chatService.getChatByRoom(room).then(function (res) {
-            _this.chats = res;
-        }, function (err) {
-            console.log(err);
-        });
+        this.chatService.getAllChat(room)
+            .subscribe(function (chats) { _this.chats = chats; });
     };
     ChatComponent.prototype.joinRoom = function () {
         var date = new Date();
@@ -63,10 +61,9 @@ var ChatComponent = /** @class */ (function () {
     };
     ChatComponent.prototype.sendMessage = function () {
         var _this = this;
-        this.chatService.saveChat(this.msgData).then(function (result) {
-            _this.socket.emit('save-message', result);
-        }, function (err) {
-            console.log(err);
+        this.chatService.create(this.msgData)
+            .subscribe(function (data) {
+            _this.socket.emit('save-message', data);
         });
     };
     ChatComponent.prototype.logout = function () {
@@ -83,11 +80,9 @@ var ChatComponent = /** @class */ (function () {
     ChatComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'app-chat',
             templateUrl: './chat.component.html',
-            styleUrls: './chat.component.css'
         }),
-        __metadata("design:paramtypes", [chat_service_1.ChatService])
+        __metadata("design:paramtypes", [index_1.ChatService])
     ], ChatComponent);
     return ChatComponent;
 }());

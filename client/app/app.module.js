@@ -22,8 +22,7 @@ var index_7 = require("./register/index");
 var index_8 = require("./mouvement-create/index");
 var index_9 = require("./mouvement-edit/index");
 var index_10 = require("./menu/index");
-var chat_service_1 = require("./chat.service");
-var chat_component_1 = require("./chat/chat.component");
+var index_11 = require("./chat/index");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -44,7 +43,7 @@ var AppModule = /** @class */ (function () {
                 index_8.MouvementCreateComponent,
                 index_9.MouvementEditComponent,
                 index_10.MenuComponent,
-                chat_component_1.ChatComponent
+                index_11.ChatComponent
             ],
             providers: [
                 index_1.customHttpProvider,
@@ -53,7 +52,7 @@ var AppModule = /** @class */ (function () {
                 index_4.AuthenticationService,
                 index_4.UserService,
                 index_4.MouvementService,
-                chat_service_1.ChatService
+                index_4.ChatService
             ],
             bootstrap: [app_component_1.AppComponent]
         })

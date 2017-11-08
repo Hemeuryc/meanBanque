@@ -2,3 +2,4 @@
 export * from './authentication.service';
 export * from './user.service';
 export * from './mouvement.service';
+export * from './chat.service';

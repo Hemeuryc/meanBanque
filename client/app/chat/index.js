@@ -3,7 +3,5 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./user"));
-__export(require("./mouvement"));
-__export(require("./chat"));
+__export(require("./chat.component"));
 //# sourceMappingURL=index.js.map

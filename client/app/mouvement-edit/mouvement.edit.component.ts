@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router , ActivatedRoute} from '@angular/router';
-import { DatePipe} from '@angular/common';
 import { AlertService, MouvementService } from '../_services/index';
 
 @Component({

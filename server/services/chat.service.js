@@ -3,11 +3,12 @@ var _ = require('lodash');
 var Q = require('q');
 var mongo = require('mongoskin');
 var db = mongo.db(config.connectionString, { native_parser: true });
-db.bind('mouvements');
+db.bind('chats');
 
 var service = {};
 
-service.getAllMouvement = getAllMouvement;
+service.getAllChat = getAllChat;
+service.getChatById = getChatById;
 service.create = create;
 service.update = update;
 service.delete = _delete;
@@ -16,31 +17,31 @@ module.exports = service;
 
 
 
-function getAllMouvement() {
+function getAllChat() {
     var deferred = Q.defer();
 
-    db.mouvements.find().toArray(function (err, mouvements) {
+    db.chats.find().toArray(function (err, chats) {
         if (err) deferred.reject(err.name + ': ' + err.message);
-        mouvements = _.map(mouvements, function (mouvement) {
-            return mouvement;
+        chats = _.map(chats, function (chat) {
+            return chat;
         });
 
-        deferred.resolve(mouvements);
+        deferred.resolve(chats);
     });
 
     return deferred.promise;
 }
 
 
-function getMouvementById(_id) {
+function getChatById(_id) {
     var deferred = Q.defer();
 
-    db.mouvements.findById(_id, function (err, mouvement) {
+    db.chats.findById(_id, function (err, chat) {
         if (err) deferred.reject(err.name + ': ' + err.message);
 
-        if (mouvement) {
+        if (chat) {
 
-            deferred.resolve(mouvement);
+            deferred.resolve(chat);
         } else {
             // user not found
             deferred.resolve();
@@ -51,17 +52,17 @@ function getMouvementById(_id) {
 }
 
 
-function create(mouvementParam) {
+function create(chatParam) {
     var deferred = Q.defer();
 
     createMouvement();
 
 
     function createMouvement() {
-        var mouvement = mouvementParam;
+        var chat = chatParam;
 
-        db.mouvements.insert(
-            mouvement,
+        db.chats.insert(
+            chat,
             function (err, doc) {
                 if (err) deferred.reject(err.name + ': ' + err.message);
                 deferred.resolve();
@@ -71,7 +72,7 @@ function create(mouvementParam) {
     return deferred.promise;
 }
 
-function update(_id, mouvementParam) {
+function update(_id, chatParam) {
     var deferred = Q.defer();
 
     updateMouvement();
@@ -80,14 +81,14 @@ function update(_id, mouvementParam) {
     function updateMouvement() {
         // fields to update
         var set = {
-            intitule: mouvementParam.intitule,
-            code: mouvementParam.code,
-            prix: mouvementParam.prix,
-            date: mouvementParam.date,
+            room: chatParam.room,
+            nickname: chatParam.nickname,
+            message : chatParam.message,
+            updated_at: Date.now,
         };
 
 
-        db.mouvements.update(
+        db.chats.update(
             { _id: mongo.helper.toObjectID(_id) },
             { $set: set },
             function (err, doc) {
@@ -103,7 +104,7 @@ function update(_id, mouvementParam) {
 function _delete(_id) {
     var deferred = Q.defer();
 
-    db.mouvements.remove(
+    db.chats.remove(
         { _id: mongo.helper.toObjectID(_id) },
         function (err) {
             if (err) deferred.reject(err.name + ': ' + err.message);

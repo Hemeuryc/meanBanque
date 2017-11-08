@@ -12,7 +12,7 @@ var appRoutes = [
     { path: '', component: index_1.HomeComponent, canActivate: [index_4.AuthGuard] },
     { path: 'login', component: index_2.LoginComponent },
     { path: 'register', component: index_3.RegisterComponent },
-    { path: 'chats', component: chat_component_1.ChatComponent },
+    { path: 'chats', component: chat_component_1.ChatComponent, canActivate: [index_4.AuthGuard] },
     { path: 'create', component: mouvement_create_component_1.MouvementCreateComponent, canActivate: [index_4.AuthGuard] },
     { path: 'edit/:id', component: mouvement_edit_component_1.MouvementEditComponent, canActivate: [index_4.AuthGuard] },
     // otherwise redirect to home

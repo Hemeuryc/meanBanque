@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
 var config = require('config.json');
 
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -21,14 +22,33 @@ app.use(expressJwt({
         }
         return null;
     }
-}).unless({ path: ['/users/authenticate', '/users/register'] }));
+}).unless({ path: ['/users/authenticate', '/users/register', '/chats/'] }));
 
 // routes
 app.use('/users', require('./controllers/users.controller'));
 app.use('/mouvements', require('./controllers/mouvement.controller'));
+app.use('/chats', require('./controllers/chat.controller'));
 
 // start server
-var port = process.env.NODE_ENV === 'production' ? 80 : 4000;
-var server = app.listen(port, function () {
-    console.log('Server listening on port ' + port);
+
+var http = require('http');
+var express = require('express'),
+    app = module.exports.app = express();
+
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);  //pass a http.Server instance
+server.listen(3000);  //listen on port 80
+
+
+
+// socket io
+io.on('connection', function (socket) {
+    console.log('User connected');
+    socket.on('disconnect', function() {
+        console.log('User disconnected');
+    });
+    socket.on('save-message', function (data) {
+        console.log(data);
+        io.emit('new-message', { message: data });
+    });
 });
