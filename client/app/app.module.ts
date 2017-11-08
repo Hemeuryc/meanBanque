@@ -13,8 +13,11 @@ import { AlertService, AuthenticationService, UserService , MouvementService} fr
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
-import {MouvementCreateComponent} from './mouvement-create/index';
-import {MouvementEditComponent} from './mouvement-edit/index';
+import { MouvementCreateComponent } from './mouvement-create/index';
+import { MouvementEditComponent } from './mouvement-edit/index';
+import { MenuComponent } from './menu/index';
+import { ChatService } from './chat.service';
+import { ChatComponent } from './chat/chat.component';
 
 
 @NgModule({
@@ -31,7 +34,9 @@ import {MouvementEditComponent} from './mouvement-edit/index';
         LoginComponent,
         RegisterComponent,
         MouvementCreateComponent,
-        MouvementEditComponent
+        MouvementEditComponent,
+        MenuComponent,
+        ChatComponent
     ],
     providers: [
         customHttpProvider,
@@ -39,7 +44,8 @@ import {MouvementEditComponent} from './mouvement-edit/index';
         AlertService,
         AuthenticationService,
         UserService,
-        MouvementService
+        MouvementService,
+        ChatService
     ],
     bootstrap: [AppComponent]
 })
