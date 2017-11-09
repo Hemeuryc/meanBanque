@@ -11,10 +11,9 @@ export class HomeComponent implements OnInit {
     currentUser: User;
     users: User[] = [];
     private _listeFilter: string ;
-    mouvements : Mouvement[] = [];
-    filteredMouvements :  Mouvement[] = [];
-
-    filteredFuturMouvements : Mouvement[]= [];
+    mouvements : any;
+    filteredMouvements :  any;
+    filteredFuturMouvements : any;
 
 
 
@@ -50,18 +49,30 @@ export class HomeComponent implements OnInit {
 
       this.mouvementService.getAllMouvement()
           .subscribe(mouvements => {
-              let today = new Date();
+                            let today = new Date();
+                            this.mouvements = mouvements;
+                            this.mouvements = this.mouvements.filter((mouvement: any) =>
+                                mouvement.user_id == this.currentUser._id);
+                            this.filteredMouvements = this.mouvements.filter((mouvement: any) =>
+                                new Date(mouvement.date).valueOf() < today.valueOf());
+                             this.filteredFuturMouvements = this.mouvements.filter((mouvement: any) =>
+                                   new Date(mouvement.date).valueOf() > today.valueOf());
 
-                  for (let mouvement of mouvements) {
-                      let mouvementDate = new Date(mouvement.date);
-                      if(mouvement.user_id == this.currentUser._id ){
-                          if(mouvementDate.valueOf() >  today.valueOf()){
-                              this.filteredFuturMouvements.push(mouvement);
-                          }else{
-                              this.filteredMouvements.push(mouvement);
-                          }
-                      }}
-              });
+                         });
+
+    }
+
+
+    refreshFuturMouvements(){
+        let today = new Date();
+        return this.filteredFuturMouvements = this.mouvements.filter((mouvement: any) =>
+            new Date(mouvement.date).valueOf() > today.valueOf());
+    }
+
+    refreshMouvements(){
+        let today = new Date();
+        return this.filteredMouvements = this.mouvements.filter((mouvement: any) =>
+            new Date(mouvement.date).valueOf() < today.valueOf());
     }
 
     get listeFilter(): string {
@@ -69,12 +80,19 @@ export class HomeComponent implements OnInit {
     }
     set listeFilter(value: string) {
         this._listeFilter = value;
-        this.filteredMouvements = this.listeFilter ? this.performFilter(this.listeFilter) : this.mouvements;
+        this.filteredFuturMouvements = this.listeFilter ? this.performFuturFilter(this.listeFilter) : this.refreshFuturMouvements();
+        this.filteredMouvements = this.listeFilter ? this.performFilter(this.listeFilter) : this.refreshMouvements();
+    }
+
+    performFuturFilter(filterBy: string): any {
+        filterBy =  filterBy.toLocaleLowerCase();
+        return this.filteredFuturMouvements.filter((mouvement: any) =>
+            mouvement.intitule.toLocaleLowerCase().indexOf(filterBy) !== -1);
     }
 
     performFilter(filterBy: string): any {
         filterBy =  filterBy.toLocaleLowerCase();
-        return this.mouvements.filter((mouvement: any) =>
+        return this.filteredMouvements.filter((mouvement: any) =>
             mouvement.intitule.toLocaleLowerCase().indexOf(filterBy) !== -1);
     }
 

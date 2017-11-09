@@ -12,6 +12,7 @@ var service = {};
 service.getAllMouvement = getAllMouvement;
 service.create = create;
 service.update = update;
+service.getMouvementById = getMouvementById;
 service.delete = _delete;
 
 module.exports = service;

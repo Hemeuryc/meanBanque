@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router , ActivatedRoute} from '@angular/router';
-import { DatePipe} from '@angular/common';
+import { User } from '../_models/index';
+
 import { AlertService, MouvementService, AuthenticationService} from '../_services/index';
 
 @Component({
@@ -11,8 +12,15 @@ import { AlertService, MouvementService, AuthenticationService} from '../_servic
 export class MouvementEditComponent implements OnInit {
     model: any = {};
     loading = false;
+    currentUser: User;
 
-    constructor(private mouvementService: MouvementService, private router: Router,  private alertService: AlertService, private route: ActivatedRoute, private authenticationService: AuthenticationService) { }
+
+    constructor(private mouvementService: MouvementService, private router: Router,  private alertService: AlertService, private route: ActivatedRoute, private authenticationService: AuthenticationService) {
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+
+
+    }
 
     ngOnInit() {
         this.getMouvement(this.route.snapshot.params['id']);

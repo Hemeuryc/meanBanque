@@ -18,9 +18,6 @@ var HomeComponent = /** @class */ (function () {
         this.alertService = alertService;
         this.authentificationService = authentificationService;
         this.users = [];
-        this.mouvements = [];
-        this.filteredMouvements = [];
-        this.filteredFuturMouvements = [];
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
     HomeComponent.prototype.ngOnInit = function () {
@@ -52,18 +49,28 @@ var HomeComponent = /** @class */ (function () {
         this.mouvementService.getAllMouvement()
             .subscribe(function (mouvements) {
             var today = new Date();
-            for (var _i = 0, mouvements_1 = mouvements; _i < mouvements_1.length; _i++) {
-                var mouvement = mouvements_1[_i];
-                var mouvementDate = new Date(mouvement.date);
-                if (mouvement.user_id == _this.currentUser._id) {
-                    if (mouvementDate.valueOf() > today.valueOf()) {
-                        _this.filteredFuturMouvements.push(mouvement);
-                    }
-                    else {
-                        _this.filteredMouvements.push(mouvement);
-                    }
-                }
-            }
+            _this.mouvements = mouvements;
+            _this.mouvements = _this.mouvements.filter(function (mouvement) {
+                return mouvement.user_id == _this.currentUser._id;
+            });
+            _this.filteredMouvements = _this.mouvements.filter(function (mouvement) {
+                return new Date(mouvement.date).valueOf() < today.valueOf();
+            });
+            _this.filteredFuturMouvements = _this.mouvements.filter(function (mouvement) {
+                return new Date(mouvement.date).valueOf() > today.valueOf();
+            });
+        });
+    };
+    HomeComponent.prototype.refreshFuturMouvements = function () {
+        var today = new Date();
+        return this.filteredFuturMouvements = this.mouvements.filter(function (mouvement) {
+            return new Date(mouvement.date).valueOf() > today.valueOf();
+        });
+    };
+    HomeComponent.prototype.refreshMouvements = function () {
+        var today = new Date();
+        return this.filteredMouvements = this.mouvements.filter(function (mouvement) {
+            return new Date(mouvement.date).valueOf() < today.valueOf();
         });
     };
     Object.defineProperty(HomeComponent.prototype, "listeFilter", {
@@ -72,14 +79,21 @@ var HomeComponent = /** @class */ (function () {
         },
         set: function (value) {
             this._listeFilter = value;
-            this.filteredMouvements = this.listeFilter ? this.performFilter(this.listeFilter) : this.mouvements;
+            this.filteredFuturMouvements = this.listeFilter ? this.performFuturFilter(this.listeFilter) : this.refreshFuturMouvements();
+            this.filteredMouvements = this.listeFilter ? this.performFilter(this.listeFilter) : this.refreshMouvements();
         },
         enumerable: true,
         configurable: true
     });
+    HomeComponent.prototype.performFuturFilter = function (filterBy) {
+        filterBy = filterBy.toLocaleLowerCase();
+        return this.filteredFuturMouvements.filter(function (mouvement) {
+            return mouvement.intitule.toLocaleLowerCase().indexOf(filterBy) !== -1;
+        });
+    };
     HomeComponent.prototype.performFilter = function (filterBy) {
         filterBy = filterBy.toLocaleLowerCase();
-        return this.mouvements.filter(function (mouvement) {
+        return this.filteredMouvements.filter(function (mouvement) {
             return mouvement.intitule.toLocaleLowerCase().indexOf(filterBy) !== -1;
         });
     };

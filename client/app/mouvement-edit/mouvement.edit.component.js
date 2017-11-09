@@ -21,6 +21,7 @@ var MouvementEditComponent = /** @class */ (function () {
         this.authenticationService = authenticationService;
         this.model = {};
         this.loading = false;
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
     MouvementEditComponent.prototype.ngOnInit = function () {
         this.getMouvement(this.route.snapshot.params['id']);
