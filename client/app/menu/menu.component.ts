@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../_services/index';
+import { Http } from '@angular/http';
 
 @Component({
   moduleId: module.id,
@@ -7,17 +8,10 @@ import { AuthenticationService } from '../_services/index';
   templateUrl: 'menu.component.html'
 })
 export class MenuComponent implements OnInit {
+    connect: boolean;
+    constructor(private authenticationService: AuthenticationService) {}
 
-  constructor(private authenticationService: AuthenticationService) {
-      const connect: boolean = authenticationService.isConnected;
-      console.log(connect);
+  ngOnInit(){
+      this.connect = this.authenticationService.getStatus();
   }
-
-
-
-  ngOnInit() {
-
-
-  }
-
 }

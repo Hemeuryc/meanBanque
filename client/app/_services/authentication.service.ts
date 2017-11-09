@@ -19,15 +19,18 @@ export class AuthenticationService {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
                 }
-
-
                 return user;
             });
     }
 
     logout() {
+        console.log("log Out");
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.isConnected = false;
+    }
+
+    getStatus(){
+        return this.isConnected;
     }
 }

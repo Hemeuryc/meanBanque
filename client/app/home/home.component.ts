@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
 import { User, Mouvement } from '../_models/index';
-import {AlertService , UserService , MouvementService } from '../_services/index';
+import {AlertService , UserService , MouvementService, AuthenticationService } from '../_services/index';
 
 @Component({
     moduleId: module.id,
@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
     filteredMouvements :  Mouvement[] = [];
 
     filteredFuturMouvements : Mouvement[]= [];
-
 
 
     ngOnInit() {
@@ -79,7 +78,7 @@ export class HomeComponent implements OnInit {
             mouvement.intitule.toLocaleLowerCase().indexOf(filterBy) !== -1);
     }
 
-    constructor(private userService: UserService, private mouvementService: MouvementService,  private alertService: AlertService) {
+    constructor(private userService: UserService, private mouvementService: MouvementService,  private alertService: AlertService, private authenticationService : AuthenticationService ) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
     }

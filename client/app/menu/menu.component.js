@@ -14,10 +14,9 @@ var index_1 = require("../_services/index");
 var MenuComponent = /** @class */ (function () {
     function MenuComponent(authenticationService) {
         this.authenticationService = authenticationService;
-        var connect = authenticationService.isConnected;
-        console.log(connect);
     }
     MenuComponent.prototype.ngOnInit = function () {
+        this.connect = this.authenticationService.getStatus();
     };
     MenuComponent = __decorate([
         core_1.Component({

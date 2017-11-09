@@ -31,9 +31,13 @@ var AuthenticationService = /** @class */ (function () {
         });
     };
     AuthenticationService.prototype.logout = function () {
+        console.log("log Out");
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.isConnected = false;
+    };
+    AuthenticationService.prototype.getStatus = function () {
+        return this.isConnected;
     };
     AuthenticationService = __decorate([
         core_1.Injectable(),

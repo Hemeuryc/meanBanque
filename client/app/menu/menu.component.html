@@ -17,8 +17,8 @@
         <li><a href="/">Accueil</a></li>
         <li *ngIf="connect"><a href="/create"> <i class="fa fa-user"></i>Ajout d'un mouvement</a></li>
         <li *ngIf="connect"><a href="/logout">Logout</a></li><!--*ngIf="connect=true"-->
-        <li *ngIf="connect!=true"><a href="/login">Login</a></li>
-        <li *ngIf="connect!=true"><a href="/register">Register</a></li>
+        <li *ngIf="!connect"><a href="/login">Login</a></li>
+        <li *ngIf="!connect"><a href="/register">Register</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
