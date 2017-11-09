@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var MenuComponent = /** @class */ (function () {
     function MenuComponent() {
+        // const connect: boolean = login.isConnected;
     }
     MenuComponent.prototype.ngOnInit = function () {
     };

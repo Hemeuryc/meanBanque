@@ -9,14 +9,14 @@ import { routing } from './app.routing';
 import { customHttpProvider } from './_helpers/index';
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
-import { AlertService, AuthenticationService, UserService,ChatService , MouvementService} from './_services/index';
+import { AlertService, AuthenticationService, UserService, MouvementService} from './_services/index'; // ChatService ,
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import { MouvementCreateComponent } from './mouvement-create/index';
 import { MouvementEditComponent } from './mouvement-edit/index';
 import { MenuComponent } from './menu/index';
-import { ChatComponent } from './chat/index';
+// import { ChatComponent } from './chat/index';
 
 
 @NgModule({
@@ -34,8 +34,8 @@ import { ChatComponent } from './chat/index';
         RegisterComponent,
         MouvementCreateComponent,
         MouvementEditComponent,
-        MenuComponent,
-        ChatComponent
+        MenuComponent
+        // ChatComponent
     ],
     providers: [
         customHttpProvider,
@@ -43,8 +43,8 @@ import { ChatComponent } from './chat/index';
         AlertService,
         AuthenticationService,
         UserService,
-        MouvementService,
-        ChatService
+        MouvementService
+        // ChatService
     ],
     bootstrap: [AppComponent]
 })

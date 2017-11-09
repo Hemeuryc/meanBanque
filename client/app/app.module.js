@@ -15,14 +15,14 @@ var app_routing_1 = require("./app.routing");
 var index_1 = require("./_helpers/index");
 var index_2 = require("./_directives/index");
 var index_3 = require("./_guards/index");
-var index_4 = require("./_services/index");
+var index_4 = require("./_services/index"); // ChatService ,
 var index_5 = require("./home/index");
 var index_6 = require("./login/index");
 var index_7 = require("./register/index");
 var index_8 = require("./mouvement-create/index");
 var index_9 = require("./mouvement-edit/index");
 var index_10 = require("./menu/index");
-var index_11 = require("./chat/index");
+// import { ChatComponent } from './chat/index';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -42,8 +42,8 @@ var AppModule = /** @class */ (function () {
                 index_7.RegisterComponent,
                 index_8.MouvementCreateComponent,
                 index_9.MouvementEditComponent,
-                index_10.MenuComponent,
-                index_11.ChatComponent
+                index_10.MenuComponent
+                // ChatComponent
             ],
             providers: [
                 index_1.customHttpProvider,
@@ -51,8 +51,8 @@ var AppModule = /** @class */ (function () {
                 index_4.AlertService,
                 index_4.AuthenticationService,
                 index_4.UserService,
-                index_4.MouvementService,
-                index_4.ChatService
+                index_4.MouvementService
+                // ChatService
             ],
             bootstrap: [app_component_1.AppComponent]
         })

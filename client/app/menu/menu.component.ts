@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginComponent } from '../login/login.component';
 
 @Component({
   moduleId: module.id,
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor() { // login : LoginComponent
+    // const connect: boolean = login.isConnected;
+  }
 
   ngOnInit() {
+
+
   }
 
 }

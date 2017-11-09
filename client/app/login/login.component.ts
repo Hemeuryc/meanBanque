@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
     model: any = {};
     loading = false;
     returnUrl: string;
+    // isConnected: boolean = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
+        // this.isConnected = true;
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(

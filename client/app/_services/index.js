@@ -7,5 +7,4 @@ __export(require("./alert.service"));
 __export(require("./authentication.service"));
 __export(require("./user.service"));
 __export(require("./mouvement.service"));
-__export(require("./chat.service"));
 //# sourceMappingURL=index.js.map

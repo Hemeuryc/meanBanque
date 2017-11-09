@@ -6,7 +6,6 @@ import {AlertService , UserService , MouvementService } from '../_services/index
 @Component({
     moduleId: module.id,
     templateUrl: 'home.component.html'
-
 })
 
 export class HomeComponent implements OnInit {
