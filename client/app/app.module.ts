@@ -15,8 +15,6 @@ import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import { MouvementCreateComponent } from './mouvement-create/index';
 import { MouvementEditComponent } from './mouvement-edit/index';
-import { MenuComponent } from './menu/index';
-// import { ChatComponent } from './chat/index';
 
 
 @NgModule({
@@ -34,8 +32,6 @@ import { MenuComponent } from './menu/index';
         RegisterComponent,
         MouvementCreateComponent,
         MouvementEditComponent,
-        MenuComponent
-        // ChatComponent
     ],
     providers: [
         customHttpProvider,

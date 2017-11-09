@@ -18,7 +18,6 @@ var AuthenticationService = /** @class */ (function () {
         this.isConnected = false;
     }
     AuthenticationService.prototype.login = function (username, password) {
-        this.isConnected = true;
         return this.http.post('/users/authenticate', { username: username, password: password })
             .map(function (response) {
             // login successful if there's a jwt token in the response
@@ -31,13 +30,8 @@ var AuthenticationService = /** @class */ (function () {
         });
     };
     AuthenticationService.prototype.logout = function () {
-        console.log("log Out");
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
-        this.isConnected = false;
-    };
-    AuthenticationService.prototype.getStatus = function () {
-        return this.isConnected;
     };
     AuthenticationService = __decorate([
         core_1.Injectable(),

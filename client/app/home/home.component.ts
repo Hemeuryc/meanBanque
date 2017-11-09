@@ -2,7 +2,6 @@
 
 import { User, Mouvement } from '../_models/index';
 import {AlertService , UserService , MouvementService, AuthenticationService } from '../_services/index';
-
 @Component({
     moduleId: module.id,
     templateUrl: 'home.component.html'
@@ -16,6 +15,7 @@ export class HomeComponent implements OnInit {
     filteredMouvements :  Mouvement[] = [];
 
     filteredFuturMouvements : Mouvement[]= [];
+
 
 
     ngOnInit() {
@@ -78,9 +78,13 @@ export class HomeComponent implements OnInit {
             mouvement.intitule.toLocaleLowerCase().indexOf(filterBy) !== -1);
     }
 
-    constructor(private userService: UserService, private mouvementService: MouvementService,  private alertService: AlertService, private authenticationService : AuthenticationService ) {
+    constructor(private userService: UserService, private mouvementService: MouvementService,  private alertService: AlertService, private authentificationService: AuthenticationService) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
     }
 
+    logout()
+    {
+        this.authentificationService.logout();
+    }
 }

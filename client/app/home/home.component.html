@@ -1,12 +1,31 @@
-﻿
-<div >
-    <h1>Bienvenue M.{{currentUser.lastName}}!</h1>
+﻿<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" style="margin-top: -13px;" [routerLink]="['/']"><img src="../../assets/images/logo.png"></a>
+        </div>
 
-    <h3>Ajouter un mouvement
-        <a [routerLink]="['/create']" class="btn btn-default btn-lg">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        </a>
-    </h3>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a [routerLink]="['/']"> <i class="fa fa-user"></i>Voir les mouvements</a></li>
+                <li><a [routerLink]="['/create']"> <i class="fa fa-user"></i>Ajout d'un mouvement</a></li>
+                <li><a [routerLink]="['/login']" (click)="logout()">Logout</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><b>{{currentUser.firstName}} {{currentUser.lastName}}</b></a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+    <div class="row">
+    <div class="col-md-8"></div>
 
 
     <h2> Mes mouvements </h2>
@@ -30,7 +49,7 @@
             <table class="table" *ngIf="filteredMouvements && filteredMouvements.length">
                 <thead>
                 <tr>
-                    <th>Intitule</th>
+                    <th>Intitulé</th>
                     <th>Code</th>
                     <th>Prix</th>
                     <th>Date d'exécution</th>
@@ -55,8 +74,6 @@
         </div>
 
     </div>
-
-    <h2> Mes mouvements à venir </h2>
 
     <div class="panel-body">
         <div class="table-responsive">
@@ -90,6 +107,7 @@
     </div>
 
 
+    <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
 
     <h3>All registered users:</h3>
     <ul>
@@ -98,5 +116,5 @@
             - <a (click)="deleteUser(user._id)">Delete</a>
         </li>
     </ul>
-    <p><a [routerLink]="['/login']" (click)="logout()">Logout</a></p>
+
 </div>

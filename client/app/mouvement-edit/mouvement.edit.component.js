@@ -13,16 +13,20 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var index_1 = require("../_services/index");
 var MouvementEditComponent = /** @class */ (function () {
-    function MouvementEditComponent(mouvementService, router, alertService, route) {
+    function MouvementEditComponent(mouvementService, router, alertService, route, authenticationService) {
         this.mouvementService = mouvementService;
         this.router = router;
         this.alertService = alertService;
         this.route = route;
+        this.authenticationService = authenticationService;
         this.model = {};
         this.loading = false;
     }
     MouvementEditComponent.prototype.ngOnInit = function () {
         this.getMouvement(this.route.snapshot.params['id']);
+    };
+    MouvementEditComponent.prototype.logout = function () {
+        this.authenticationService.logout();
     };
     MouvementEditComponent.prototype.getMouvement = function (id) {
         var _this = this;
@@ -45,7 +49,7 @@ var MouvementEditComponent = /** @class */ (function () {
             moduleId: module.id,
             templateUrl: 'mouvement.edit.component.html'
         }),
-        __metadata("design:paramtypes", [index_1.MouvementService, router_1.Router, index_1.AlertService, router_1.ActivatedRoute])
+        __metadata("design:paramtypes", [index_1.MouvementService, router_1.Router, index_1.AlertService, router_1.ActivatedRoute, index_1.AuthenticationService])
     ], MouvementEditComponent);
     return MouvementEditComponent;
 }());

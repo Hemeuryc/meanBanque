@@ -12,11 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var index_1 = require("../_services/index");
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(userService, mouvementService, alertService, authenticationService) {
+    function HomeComponent(userService, mouvementService, alertService, authentificationService) {
         this.userService = userService;
         this.mouvementService = mouvementService;
         this.alertService = alertService;
-        this.authenticationService = authenticationService;
+        this.authentificationService = authentificationService;
         this.users = [];
         this.mouvements = [];
         this.filteredMouvements = [];
@@ -82,6 +82,9 @@ var HomeComponent = /** @class */ (function () {
         return this.mouvements.filter(function (mouvement) {
             return mouvement.intitule.toLocaleLowerCase().indexOf(filterBy) !== -1;
         });
+    };
+    HomeComponent.prototype.logout = function () {
+        this.authentificationService.logout();
     };
     HomeComponent = __decorate([
         core_1.Component({

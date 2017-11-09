@@ -13,9 +13,10 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var index_1 = require("../_services/index");
 var MouvementCreateComponent = /** @class */ (function () {
-    function MouvementCreateComponent(router, mouvementService, alertService) {
+    function MouvementCreateComponent(router, mouvementService, authentificationService, alertService) {
         this.router = router;
         this.mouvementService = mouvementService;
+        this.authentificationService = authentificationService;
         this.alertService = alertService;
         this.model = {};
         this.loading = false;
@@ -34,6 +35,9 @@ var MouvementCreateComponent = /** @class */ (function () {
             _this.loading = false;
         });
     };
+    MouvementCreateComponent.prototype.logout = function () {
+        this.authentificationService.logout();
+    };
     MouvementCreateComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -41,6 +45,7 @@ var MouvementCreateComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [router_1.Router,
             index_1.MouvementService,
+            index_1.AuthenticationService,
             index_1.AlertService])
     ], MouvementCreateComponent);
     return MouvementCreateComponent;

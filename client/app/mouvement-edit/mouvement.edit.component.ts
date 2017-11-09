@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router , ActivatedRoute} from '@angular/router';
 import { DatePipe} from '@angular/common';
-import { AlertService, MouvementService } from '../_services/index';
+import { AlertService, MouvementService, AuthenticationService} from '../_services/index';
 
 @Component({
     moduleId: module.id,
@@ -12,10 +12,14 @@ export class MouvementEditComponent implements OnInit {
     model: any = {};
     loading = false;
 
-    constructor(private mouvementService: MouvementService, private router: Router,  private alertService: AlertService, private route: ActivatedRoute) { }
+    constructor(private mouvementService: MouvementService, private router: Router,  private alertService: AlertService, private route: ActivatedRoute, private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
         this.getMouvement(this.route.snapshot.params['id']);
+    }
+
+    logout() {
+        this.authenticationService.logout();
     }
 
     getMouvement(id : string) {

@@ -21,8 +21,6 @@ var index_6 = require("./login/index");
 var index_7 = require("./register/index");
 var index_8 = require("./mouvement-create/index");
 var index_9 = require("./mouvement-edit/index");
-var index_10 = require("./menu/index");
-// import { ChatComponent } from './chat/index';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -42,8 +40,6 @@ var AppModule = /** @class */ (function () {
                 index_7.RegisterComponent,
                 index_8.MouvementCreateComponent,
                 index_9.MouvementEditComponent,
-                index_10.MenuComponent
-                // ChatComponent
             ],
             providers: [
                 index_1.customHttpProvider,

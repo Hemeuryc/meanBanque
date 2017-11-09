@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../_models/index';
-import { AlertService, MouvementService } from '../_services/index';
+import { AlertService, MouvementService, AuthenticationService } from '../_services/index';
 
 @Component({
     moduleId: module.id,
@@ -16,6 +16,7 @@ export class MouvementCreateComponent {
     constructor(
         private router: Router,
         private mouvementService: MouvementService,
+        private authentificationService: AuthenticationService,
         private alertService: AlertService) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
@@ -33,5 +34,10 @@ export class MouvementCreateComponent {
                     this.alertService.error(error);
                     this.loading = false;
                 });
+    }
+
+    logout()
+    {
+        this.authentificationService.logout();
     }
 }

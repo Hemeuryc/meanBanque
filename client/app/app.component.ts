@@ -1,5 +1,4 @@
 ﻿import { Component } from '@angular/core';
-import { AuthenticationService } from './_services/index';
 
 @Component({
     moduleId: module.id,
@@ -7,10 +6,4 @@ import { AuthenticationService } from './_services/index';
     templateUrl: 'app.component.html'
 })
 
-export class AppComponent {
-    connect: boolean;
-    constructor(authenticationService: AuthenticationService) {
-        this.connect = authenticationService.isConnected;
-        console.log(this.connect);
-    }
-}
+export class AppComponent { }

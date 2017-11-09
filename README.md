@@ -10,6 +10,9 @@ cd client -> npm install -> npm start
 ```
 mongod
 ```
+```
+mongo
+```
 
 ## Projet réalisé par
 

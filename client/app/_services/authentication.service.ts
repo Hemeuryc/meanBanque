@@ -10,7 +10,8 @@ export class AuthenticationService {
     isConnected: boolean = false;
 
     login(username: string, password: string) {
-        this.isConnected = true;
+
+
         return this.http.post('/users/authenticate', { username: username, password: password })
             .map((response: Response) => {
                 // login successful if there's a jwt token in the response
@@ -24,13 +25,7 @@ export class AuthenticationService {
     }
 
     logout() {
-        console.log("log Out");
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
-        this.isConnected = false;
-    }
-
-    getStatus(){
-        return this.isConnected;
     }
 }
