@@ -10,9 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var index_1 = require("../_services/index");
 var MenuComponent = /** @class */ (function () {
-    function MenuComponent() {
-        // const connect: boolean = login.isConnected;
+    function MenuComponent(authenticationService) {
+        this.authenticationService = authenticationService;
+        var connect = authenticationService.isConnected;
+        console.log(connect);
     }
     MenuComponent.prototype.ngOnInit = function () {
     };
@@ -22,7 +25,7 @@ var MenuComponent = /** @class */ (function () {
             selector: 'app-menu',
             templateUrl: 'menu.component.html'
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [index_1.AuthenticationService])
     ], MenuComponent);
     return MenuComponent;
 }());

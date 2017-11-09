@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginComponent } from '../login/login.component';
+import { AuthenticationService } from '../_services/index';
 
 @Component({
   moduleId: module.id,
@@ -8,9 +8,12 @@ import {LoginComponent } from '../login/login.component';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { // login : LoginComponent
-    // const connect: boolean = login.isConnected;
+  constructor(private authenticationService: AuthenticationService) {
+      const connect: boolean = authenticationService.isConnected;
+      console.log(connect);
   }
+
+
 
   ngOnInit() {
 

@@ -7,7 +7,10 @@ import 'rxjs/add/operator/map'
 export class AuthenticationService {
     constructor(private http: Http) { }
 
+    isConnected: boolean = false;
+
     login(username: string, password: string) {
+        this.isConnected = true;
         return this.http.post('/users/authenticate', { username: username, password: password })
             .map((response: Response) => {
                 // login successful if there's a jwt token in the response
@@ -17,6 +20,7 @@ export class AuthenticationService {
                     localStorage.setItem('currentUser', JSON.stringify(user));
                 }
 
+
                 return user;
             });
     }
@@ -24,5 +28,6 @@ export class AuthenticationService {
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
+        this.isConnected = false;
     }
 }

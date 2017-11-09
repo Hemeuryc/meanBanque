@@ -15,8 +15,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="/">Accueil</a></li>
-        <li><a href="/create"> <i class="fa fa-user"></i>Ajout d'un mouvement</a></li>
-        <li><a href="/logout">Logout</a></li><!--*ngIf="connect=true"-->
+        <li *ngIf="connect"><a href="/create"> <i class="fa fa-user"></i>Ajout d'un mouvement</a></li>
+        <li *ngIf="connect"><a href="/logout">Logout</a></li><!--*ngIf="connect=true"-->
+        <li *ngIf="connect!=true"><a href="/login">Login</a></li>
+        <li *ngIf="connect!=true"><a href="/register">Register</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

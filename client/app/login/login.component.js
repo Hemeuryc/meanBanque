@@ -13,7 +13,6 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var index_1 = require("../_services/index");
 var LoginComponent = /** @class */ (function () {
-    // isConnected: boolean = false;
     function LoginComponent(route, router, authenticationService, alertService) {
         this.route = route;
         this.router = router;
@@ -30,7 +29,6 @@ var LoginComponent = /** @class */ (function () {
     };
     LoginComponent.prototype.login = function () {
         var _this = this;
-        // this.isConnected = true;
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(function (data) {
