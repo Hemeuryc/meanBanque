@@ -82,9 +82,10 @@ var ChatComponent = /** @class */ (function () {
             moduleId: module.id,
             templateUrl: './chat.component.html',
         }),
-        __metadata("design:paramtypes", [index_1.ChatService])
+        __metadata("design:paramtypes", [typeof (_a = typeof index_1.ChatService !== "undefined" && index_1.ChatService) === "function" && _a || Object])
     ], ChatComponent);
     return ChatComponent;
+    var _a;
 }());
 exports.ChatComponent = ChatComponent;
 //# sourceMappingURL=chat.component.js.map
