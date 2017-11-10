@@ -17,3 +17,7 @@ mongod
 * Adrien MICHEL (Jukelips)
 * Clément HEMEURY (Hemeuryc)
 * Ciprian PINTILIE (CPintilie)
+
+## Documentation
+
+> http://sylrus.fr/BankAngular/Presentation_BankApp.pdf
